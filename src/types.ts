@@ -8,6 +8,7 @@ export interface MenuItem {
   calories?: number;
   sensoryNotes?: string;
   isPopular?: boolean;
+  image?: string;
 }
 
 export interface Reservation {
@@ -21,7 +22,7 @@ export interface Reservation {
   confirmationCode?: string;
 }
 
-export type ActivePage = 'home' | 'menu' | 'ambience' | 'about' | 'events' | 'find-us' | 'reservation';
+export type ActivePage = 'home' | 'menu' | 'ambience' | 'about' | 'events' | 'find-us' | 'reservation' | 'admin';
 
 export type Language = 'en' | 'pl';
 

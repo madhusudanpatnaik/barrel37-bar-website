@@ -8,9 +8,10 @@ import { getLocalizedItem } from '../data/menuTranslations';
 
 interface MenuSectionProps {
   language: Language;
+  menuItems: MenuItem[];
 }
 
-export default function MenuSection({ language }: MenuSectionProps) {
+export default function MenuSection({ language, menuItems }: MenuSectionProps) {
   const [activeCategory, setActiveCategory] = useState<'all' | 'whisky' | 'cocktail' | 'mocktail'>('all');
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   
@@ -30,7 +31,7 @@ export default function MenuSection({ language }: MenuSectionProps) {
   const t = TRANSLATIONS[language];
 
   // Localize menu items
-  const localizedItems = MENU_ITEMS.map((item) => getLocalizedItem(item, language));
+  const localizedItems = menuItems.map((item) => getLocalizedItem(item, language));
 
   // Filter items
   const filteredItems = activeCategory === 'all' 
@@ -343,6 +344,16 @@ export default function MenuSection({ language }: MenuSectionProps) {
                 )}
 
                 <div>
+                  {item.image && (
+                    <div className="w-full h-44 mb-4 overflow-hidden border border-neutral-850 bg-neutral-950 relative group-hover:border-gold/30 transition-colors">
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
                   <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8C8476]">
                     {item.category === 'whisky' ? (language === 'pl' ? 'Starzona Whisky' : 'Single Malt Scotch') : item.category === 'cocktail' ? (language === 'pl' ? 'Butikowy Koktajl' : 'Artisan Cocktail') : (language === 'pl' ? 'Bezalkoholowy Tonik' : 'Zero-proof')}
                   </span>
@@ -417,6 +428,17 @@ export default function MenuSection({ language }: MenuSectionProps) {
                       <X size={16} />
                     </button>
                   </div>
+
+                  {selectedItem.image && (
+                    <div className="w-full h-56 mb-8 overflow-hidden border border-neutral-850 bg-neutral-950 relative animate-fadeIn">
+                      <img 
+                        src={selectedItem.image} 
+                        alt={selectedItem.name} 
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  )}
 
                   {/* Pricing block */}
                   <div className="flex justify-between items-center py-4 px-5 bg-neutral-950 border border-neutral-900 mb-8 rounded-none">

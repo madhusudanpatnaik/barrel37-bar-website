@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ActivePage, Language } from './types';
+import { ActivePage, Language, MenuItem } from './types';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
@@ -10,16 +10,85 @@ import ReservationSection from './components/ReservationSection';
 import AmbienceSection from './components/AmbienceSection';
 import EventsSection from './components/EventsSection';
 import FindUsSection from './components/FindUsSection';
+import AdminPanel from './components/AdminPanel';
+import { MENU_ITEMS } from './data/menu';
 
 export default function App() {
   const [activePage, setActivePage] = useState<ActivePage>('home');
   const [currentTime, setCurrentTime] = useState<string>('18:00:00');
   const [language, setLanguage] = useState<Language>('en');
 
+  // Menu items state with localStorage backup
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('barrel37_menu_items');
+    if (saved) {
+      try {
+        setMenuItems(JSON.parse(saved));
+      } catch (e) {
+        setMenuItems(MENU_ITEMS);
+      }
+    } else {
+      setMenuItems(MENU_ITEMS);
+    }
+  }, []);
+
+  const handleAddMenuItem = (item: MenuItem) => {
+    const updated = [item, ...menuItems];
+    setMenuItems(updated);
+    localStorage.setItem('barrel37_menu_items', JSON.stringify(updated));
+  };
+
+  const handleDeleteMenuItem = (id: string) => {
+    const updated = menuItems.filter(item => item.id !== id);
+    setMenuItems(updated);
+    localStorage.setItem('barrel37_menu_items', JSON.stringify(updated));
+  };
+
+  const handleResetMenu = () => {
+    setMenuItems(MENU_ITEMS);
+    localStorage.removeItem('barrel37_menu_items');
+  };
+
   // Multi-page scrolls reset
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
   }, [activePage]);
+
+  // Handle direct url navigation and redirect /admin to admin screen
+  useEffect(() => {
+    const checkAdminNavigation = () => {
+      const path = window.location.pathname;
+      const hash = window.location.hash;
+      const search = window.location.search;
+      
+      if (
+        path === '/admin' || 
+        path.endsWith('/admin') || 
+        path.endsWith('/admin/') || 
+        hash === '#/admin' || 
+        hash === '#admin' || 
+        search.includes('page=admin')
+      ) {
+        setActivePage('admin');
+        
+        // Silently redirect URL back to `/` so internal client-side navigation operates smoothly on refresh
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', '/');
+        }
+      }
+    };
+
+    // Run on initial mount
+    checkAdminNavigation();
+
+    // Catch forward/backward history and popstate triggers
+    window.addEventListener('popstate', checkAdminNavigation);
+    return () => {
+      window.removeEventListener('popstate', checkAdminNavigation);
+    };
+  }, []);
 
   // Kraków Kazimierz timezone ticking clock (Europe/Warsaw)
   useEffect(() => {
@@ -84,6 +153,7 @@ export default function App() {
             {activePage === 'menu' && (
               <MenuSection 
                 language={language}
+                menuItems={menuItems}
               />
             )}
             {activePage === 'ambience' && (
@@ -110,6 +180,15 @@ export default function App() {
             {activePage === 'reservation' && (
               <ReservationSection 
                 language={language}
+              />
+            )}
+            {activePage === 'admin' && (
+              <AdminPanel
+                language={language}
+                menuItems={menuItems}
+                onAddMenuItem={handleAddMenuItem}
+                onDeleteMenuItem={handleDeleteMenuItem}
+                onResetMenu={handleResetMenu}
               />
             )}
           </motion.div>
