@@ -1,0 +1,6 @@
+{
+  "name": "Barrel 37 Bar",
+  "description": "An exquisite premium speakeasy and whiskey bar clone located in Kraków Kazimierz. Features fully bilingual English/Polish layouts, curated palate selectors, and customizable table reservations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
