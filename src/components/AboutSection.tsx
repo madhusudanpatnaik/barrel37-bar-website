@@ -66,13 +66,13 @@ export default function AboutSection({ language }: AboutSectionProps) {
               <div className="space-y-4 text-xs md:text-sm text-neutral-400 font-sans leading-relaxed">
                 <p>
                   {language === 'pl'
-                    ? 'Barrel 37 powstało z prostej myśli — przekonania, że szlachetny alkohol to doświadczenie, a nie transakcja handlowa. Położony w sercu krakowskiego Kazimierza, nasz lokal oferuje ciepłe światło pochodni odbijające się od ceglanych ścian, zapach dębu w powietrzu oraz zdobiące mury portrety zwierząt w eleganckich strojach z minionej epoki.'
-                    : 'Barrel 37 was born from a single obsession — the belief that a good drink is an experience, not a transaction. Hidden inside Kraków’s historic Kazimierz district, our bar was built to feel like an escape: warm light reflecting off rustic brick walls, oil portraits of animals in elegant attire, and the gentle scent of aged oak in the air.'}
+                    ? 'Barrel 37 powstało z marzenia czterech przyjaciół. Chcieliśmy stworzyć miejsce, którego sami zawsze szukaliśmy: przestrzeń, w której można odetchnąć, zapomnieć o zegarku i po prostu cieszyć się chwilą. Bez względu na to, czy wpadasz na legendarnego burgera, rzadką whisky, czy jedną z naszych kultowych 5-litrowych tub piwnych do podzielenia się z własną paczką – zbudowaliśmy tę przestrzeń właśnie dla Ciebie. W Barrel 37 nie jesteś tylko klientem – jesteś częścią naszego kręgu. Wejdź, zrelaksuj się i zostań z nami na dłużej.'
+                    : 'Barrel 37 started with four friends and a shared dream. We wanted to create the kind of place we were always looking for: a spot to kick back, forget the clock, and truly enjoy the moment. Whether you’re here for a legendary burger, a rare whiskey, or one of our signature 5-liter beer tubes to share with your own crew, we built this space for you. At Barrel 37, you’re not just a customer—you’re part of the circle. Come in, chill out, and stay a while.'}
                 </p>
                 <p>
                   {language === 'pl'
-                    ? 'Nasza kolekcja obejmuje ponad 200 butelek ze Szkocji, Japonii, Indii oraz Irlandii. Każda pozycja na karcie została wybrana na drodze rygorystycznych testów sensorycznych naszych sommelierów, aby zapewnić niezapomniane chwile kontemplacji.'
-                    : 'Our collection covers over 200 single malts, blends, and craft whiskies from legendary and micro distilleries across Scotland, Japan, India and Ireland. Every cocktail on the menu is built on the same guiding philosophy: respecting history, but leaving a customized thumbprint.'}
+                    ? 'Nasza kolekcja obejmuje bogaty wybór beczkowych trunków oraz kraftowych kompozycji. Każda pozycja na naszej karcie została dopracowana z myślą o autentycznych smakach, dobrej zabawie i niezapomnianych wieczorach ze znajomymi.'
+                    : 'Our program integrates fine barrel-aged spirits, custom micro-brews, and artisan craft compositions. Every choice inside our custom menu curation is designed from the ground up to support high-quality flavor, great memories, and nights spent with your close circle.'}
                 </p>
               </div>
             </div>
