@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Barrel 37 — Speakeasy & Whisky Bar
 
-# Run and deploy your AI Studio app
+Marketing site for Barrel 37, a speakeasy and whisky bar in Kraków Kazimierz.
+Fully bilingual (English / Polish), with a palate-based drink selector and
+table reservations.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/803904da-fc0e-4830-a6b0-ec9612430778
+- **Bilingual layouts** — English and Polish throughout
+- **Palate selector** — browse the whisky menu by taste profile
+- **Table reservations** — customisable booking flow
+- **Sections** — hero, about, menu, ambience, events, find-us
+- **Admin panel** — manage reservations and content
 
-## Run Locally
+## Stack
 
-**Prerequisites:**  Node.js
+React 19 · Vite · Tailwind CSS 4 · TypeScript · Motion · Lucide
 
+## Running locally
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Prerequisites:** Node.js 18+
+
+```bash
+npm install
+cp .env.example .env    # then fill in the values
+npm run dev             # http://localhost:3000
+```
+
+## Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Vite dev server on port 3000 |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Serve the production build |
+| `npm run lint` | Typecheck (`tsc --noEmit`) |
+
+## Configuration
+
+Secrets are read from the environment. Copy `.env.example` to `.env` and
+populate it — `.env` is gitignored and must never be committed.
+
+## Note on assets
+
+Some image files under `src/assets/images/` still carry `qitchen_*` filenames
+from the starter template this project was built on. The rendered content is
+Barrel 37's own; only the filenames are stale.
